@@ -5,6 +5,9 @@ jobs:
     docker: # Docker 실행
       - image: cimg/node:20.3.1 # Node.js 이미지 사용
     steps: # 실행할 명령어
+      - add_ssh_keys: # SSH 키 추가
+          fingerprints: # SSH 키 지문
+            - "$GITHUB_PERSONAL_TOKEN" # Github 개인 액세스 토큰 환경 변수 사용
       - checkout # 코드를 가져옴
       - setup_remote_docker # Docker 레지스트리에 접근하기 위한 설정
       - run: # Docker 이미지 빌드 및 푸시
@@ -25,6 +28,9 @@ jobs:
     docker: # Docker 실행
       - image: cimg/base:2023.06 # circleci 우분투 기본 이미지 사용
     steps:
+      - add_ssh_keys: # SSH 키 추가
+          fingerprints: # SSH 키 지문
+            - "$GITHUB_PERSONAL_TOKEN" # Github 개인 액세스 토큰 환경 변수 사용
       - checkout
       - setup_remote_docker
       - run:
